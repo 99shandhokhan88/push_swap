@@ -7,6 +7,7 @@ Here's my roadmap for "push_swap" project, broken down into a 20-day schedule ba
 ## Day 1 - Day 4: Understanding the Project and Problem**
 
 I read the subject and I asked some of my peers for help. I spend the first few days fully understanding the requirements and constraints of the "push_swap" project. I made sure I'm comfortable with the allowed actions: sa, sb, ss, ra, rb, rr, rra, rrb, rrr, pa, and pb. I reviewed the provided strategies for handling 3 random numbers and 5 random numbers, as they serve as the foundation for larger cases. After that I searched some infos on the web finding those resources:
+
 https://medium.com/@ayogun/push-swap-c1f5d2d41e97
 https://www.youtube.com/watch?v=OaG81sDEpVk
 https://www.youtube.com/watch?v=7h1s2SojIRw
