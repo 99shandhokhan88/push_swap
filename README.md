@@ -49,7 +49,9 @@ After all this, considering that I pushed so_long and I had only 20 days until t
 
 The idea is simple, You have two stacks called Stack A and Stack B. Stack A is given a random list of unorganized numbers. You must take the random list of numbers in Stack A and sort them so that Stack A is organized from smallest to largest. There are only a few moves you’re allowed to used to manipulate the stacks that we’re going to call “Actions”. The main goal of this project is to organize Stack A in as few actions as possible.
 
-
+So what actions are we allowed to use on the two stacks?
+The actions are named: sa, sb, ss, ra, rb, rr, rra, rrb, rrr, pa, pb.
+Here’s how they all work:
 
 
 
