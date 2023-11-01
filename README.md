@@ -44,7 +44,7 @@ I read the subject and I asked some of my peers for help. I spend the first few 
 
 
 After all this, considering that I pushed so_long and I had only 20 days until the end of November 2023, I find that the most fast, clear, pleasant and smart way for this project is to follow the guide of one of my friends at 42 called Lnicoter:
-- .[push_swap guide that I will follow](https://github.com/NicoTerabyte/Push_swap/blob/main/Push_swap/english_guide.pdf)
+- [push_swap guide that I will follow](https://github.com/NicoTerabyte/Push_swap/blob/main/Push_swap/english_guide.pdf)
 
 
 
