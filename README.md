@@ -2,11 +2,11 @@
 
 "push_swap" is a computer science project that challenges students to create an algorithm in the C programming language. The objective is to sort a randomly ordered list of numbers in two stacks (Stack A and Stack B) using a limited set of predefined actions, such as swapping elements, rotating the stacks, and pushing elements between the stacks. The main goal of the project is to sort the numbers in Stack A with the fewest possible actions. Students must devise efficient sorting strategies to accomplish this within the project's action limit.
 
-Certainly! Here's a roadmap for your "push_swap" project, broken down into a 20-day schedule based on the information you provided:
+Here's my roadmap for "push_swap" project, broken down into a 20-day schedule based on my experience:
 
-**Day 1 - Day 3: Understanding the Project and Problem**
+**Day 1 - Day 4: Understanding the Project and Problem**
 
-- Spend the first few days fully understanding the requirements and constraints of the "push_swap" project.
+I Spend the first few days fully understanding the requirements and constraints of the "push_swap" project.
 - Make sure you are comfortable with the allowed actions: sa, sb, ss, ra, rb, rr, rra, rrb, rrr, pa, and pb.
 - Review the provided strategies for handling 3 random numbers and 5 random numbers, as they serve as the foundation for larger cases.
 
