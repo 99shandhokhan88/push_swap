@@ -6,7 +6,7 @@
 /*   By: vzashev <vzashev@student.42roma.it>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 16:48:45 by vzashev           #+#    #+#             */
-/*   Updated: 2023/11/05 19:06:00 by vzashev          ###   ########.fr       */
+/*   Updated: 2023/11/05 19:38:09 by vzashev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 #endif
 
 #ifndef MIN_INT
-# define MIN_INT -2147483648
+# define MIN_INT -2147483647
 #endif
 
 typedef struct s_stack
@@ -33,7 +33,7 @@ typedef struct s_stack
 	int	last_b;
 }		t_stack;
 
-t_stack	*init(int argc, char **argv);
+t_stack	*ft_init(int argc, char **argv);
 char	**ft_split(const char *s, char c);
 int	ft_atoi(char *num, int *stack, t_stack *stack_struct);
 void	ft_free_matrix(char **matrix);

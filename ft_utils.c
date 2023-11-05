@@ -6,7 +6,7 @@
 /*   By: vzashev <vzashev@student.42roma.it>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 17:30:16 by vzashev           #+#    #+#             */
-/*   Updated: 2023/11/05 19:06:05 by vzashev          ###   ########.fr       */
+/*   Updated: 2023/11/05 19:37:31 by vzashev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	ft_error(int *stack, t_stack *stack_struct)
 {
+	(void)stack;
 	write(2, "Error\n", 6);
 	ft_exit(stack_struct);
 }
