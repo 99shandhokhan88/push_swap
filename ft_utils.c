@@ -5,16 +5,15 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: vzashev <vzashev@student.42roma.it>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/05 17:30:16 by vzashev           #+#    #+#             */
-/*   Updated: 2023/11/05 19:37:31 by vzashev          ###   ########.fr       */
+/*   Created: 2023/11/07 13:30:32 by vzashev           #+#    #+#             */
+/*   Updated: 2023/11/07 13:30:34 by vzashev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_error(int *stack, t_stack *stack_struct)
+void	ft_error(t_stack *stack_struct)
 {
-	(void)stack;
 	write(2, "Error\n", 6);
 	ft_exit(stack_struct);
 }
@@ -26,12 +25,12 @@ int	ft_is_digit(int c)
 	return (0);
 }
 
-int	ft_atoi(char *num, int *stack, t_stack *stack_struct)
+int	ft_atoi(char *num, t_stack *stack_struct)
 {
-	int	i;
-	int	sign;
-	int	res;
-	
+	int			i;
+	int			sign;
+	long int	res;
+
 	i = 0;
 	sign = 1;
 	res = 0;
@@ -47,11 +46,11 @@ int	ft_atoi(char *num, int *stack, t_stack *stack_struct)
 	while (num[i])
 	{
 		if (!ft_is_digit(num[i]))
-			ft_error(stack, stack_struct);
+			ft_error(stack_struct);
 		res = res * 10 + num[i++] - '0';
 	}
-	if (res > MAX_INT || res < MIN_INT)
-		ft_error(stack, stack_struct);
+	if (res > INT_MAX || res < INT_MIN)
+		ft_error(stack_struct);
 	return (res * sign);
 }
 

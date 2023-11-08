@@ -5,56 +5,50 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: vzashev <vzashev@student.42roma.it>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/16 17:27:15 by lnicoter          #+#    #+#             */
-/*   Updated: 2023/11/05 19:05:12 by vzashev          ###   ########.fr       */
+/*   Created: 2023/11/07 13:29:42 by vzashev           #+#    #+#             */
+/*   Updated: 2023/11/07 17:12:13 by vzashev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_sort_three_ab(t_stack *stack, int dim)
+void	ft_sort_three_a(t_stack *stack, int dim)
 {
-	if (dim == 3 && stack->last_a == 3)
-		ft_sort_three(stack);
-	else if (dim == 2)
+	if (dim == 3)
 	{
-		if (stack->a[0] > stack->a[1])
-			ft_sa(stack);
-	}
-	else if (dim == 3)
-	{
-		while (dim != 3 || !(stack->a[0] < stack->a[1]
-				&& stack->a[1] < stack->a[2]))
+		while (!(stack->a[0] < stack->a[1] && stack->a[1] < stack->a[2]))
 		{
-			if (dim == 3 && stack->a[0] > stack->a[1] && stack->a[2])
+			if (stack->a[0] > stack->a[1] && stack->a[2])
 				ft_sa(stack);
-			else if (dim == 3 && !(stack->a[2] > stack->a[0]
-					&& stack->a[2] > stack->a[1]))
+			else if (!(stack->a[2] > stack->a[0] && stack->a[2] > stack->a[1]))
 				dim = ft_check_push(stack, dim, 1);
-			else if (stack->a[0] > stack->a[1])
+			else
+			{
 				ft_sa(stack);
-			else if (dim++)
 				ft_pa(stack);
+			}
 		}
 	}
+	else if (dim == 2 && stack->a[0] > stack->a[1])
+		ft_sa(stack);
 }
 
 int	ft_partition(int *pivot, int *stack, int dim)
 {
-	int	*tmp;
+	int	*temp_stack;
 	int	i;
 	int	j;
 
-	tmp = (int *)malloc(sizeof(int) * dim);
-	if (!tmp)
+	temp_stack = (int *)malloc(sizeof(int) * dim);
+	if (!temp_stack)
 		return (0);
 	i = 0;
 	j = 0;
 	while (i < dim)
-		tmp[j++] = stack[i++];
-	ft_temp_sort(tmp, dim);
-	*pivot = tmp[dim / 2];
-	free(tmp);
+		temp_stack[j++] = stack[i++];
+	ft_temp_sort(temp_stack, dim);
+	*pivot = temp_stack[dim / 2];
+	free(temp_stack);
 	return (1);
 }
 
@@ -118,19 +112,19 @@ int	ft_quick_sort_b(t_stack *stack, int dim, int count_r)
 int	ft_quick_sort_a(t_stack *stack, int dim, int count_r)
 {
 	int	pivot;
-	int	numbers;
+	int	number_elems;
 
 	if (ft_check_asc_order(stack->a, dim) == 1)
 		return (1);
-	numbers = dim;
+	number_elems = dim;
 	if (dim <= 3)
 	{
-		ft_sort_three_ab(stack, dim);
+		ft_sort_three_a(stack, dim);
 		return (1);
 	}
 	if (!count_r && !ft_partition(&pivot, stack->a, dim))
 		return (0);
-	while (dim != numbers / 2 + numbers % 2)
+	while (dim != number_elems / 2 + number_elems % 2)
 	{
 		if (stack->a[0] < pivot && (dim--))
 			ft_pb(stack);
@@ -139,7 +133,7 @@ int	ft_quick_sort_a(t_stack *stack, int dim, int count_r)
 	}
 	while (count_r--)
 		ft_rra(stack);
-	return (ft_quick_sort_a(stack, numbers / 2 + numbers % 2, 0)
-		&& ft_quick_sort_b(stack, numbers / 2, 0));
+	return (ft_quick_sort_a(stack, number_elems / 2 + number_elems % 2, 0)
+		&& ft_quick_sort_b(stack, number_elems / 2, 0));
 	return (1);
 }

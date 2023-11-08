@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: vzashev <vzashev@student.42roma.it>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/05 17:41:08 by vzashev           #+#    #+#             */
-/*   Updated: 2023/11/05 19:00:58 by vzashev          ###   ########.fr       */
+/*   Created: 2023/11/07 13:29:07 by vzashev           #+#    #+#             */
+/*   Updated: 2023/11/07 15:14:43 by vzashev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	ft_check_push(t_stack *stack, int dim, int n)
 	return (dim);
 }
 
-void	ft_temp_sort(int *temp_stk, int dim)
+void	ft_temp_sort(int *temp_stack, int dim)
 {
 	int	i;
 	int	j;
@@ -62,11 +62,11 @@ void	ft_temp_sort(int *temp_stk, int dim)
 		j = i + 1;
 		while (j < dim)
 		{
-			if (temp_stk[i] > temp_stk[j])
+			if (temp_stack[i] > temp_stack[j])
 			{
-				temp = temp_stk[i];
-				temp_stk[i] = temp_stk[j];
-				temp_stk[j] = temp;
+				temp = temp_stack[i];
+				temp_stack[i] = temp_stack[j];
+				temp_stack[j] = temp;
 			}
 			j++;
 		}

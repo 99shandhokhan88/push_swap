@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: vzashev <vzashev@student.42roma.it>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/05 17:52:13 by vzashev           #+#    #+#             */
-/*   Updated: 2023/11/05 17:58:39 by vzashev          ###   ########.fr       */
+/*   Created: 2023/11/07 13:29:48 by vzashev           #+#    #+#             */
+/*   Updated: 2023/11/07 17:13:59 by vzashev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,13 @@ int	ft_rrb(t_stack *stack)
 	int	len;
 	int	temp;
 
-	temp = stack->b[stack->last_b - 1];
 	len = stack->last_b;
-	while (len-- > 0)
-		stack->b[len] = stack->b[len - 1];
+	temp = stack->b[stack->last_b - 1];
+	while (len > 1)
+	{
+		stack->b[len - 1] = stack->b[len - 2];
+		len--;
+	}
 	stack->b[0] = temp;
 	write(1, "rrb\n", 4);
 	return (1);

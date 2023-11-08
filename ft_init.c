@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: vzashev <vzashev@student.42roma.it>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/05 16:57:32 by vzashev           #+#    #+#             */
-/*   Updated: 2023/11/05 17:38:08 by vzashev          ###   ########.fr       */
+/*   Created: 2023/11/07 13:29:16 by vzashev           #+#    #+#             */
+/*   Updated: 2023/11/07 14:55:57 by vzashev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	ft_find_dups(int *stack, int dim, t_stack *stack_struct)
 		while (j < dim)
 		{
 			if (stack[i] == stack[j])
-				ft_error(stack, stack_struct);
+				ft_error(stack_struct);
 			j++;
 		}
 		i++;
@@ -40,7 +40,7 @@ void	ft_fill_stack(int argc, char **argv, int i, t_stack *stack)
 	stack->b = (int *)malloc(sizeof(int) * (argc));
 	while (i < argc)
 	{
-		stack->a[j] = ft_atoi(argv[i], stack->a, stack);
+		stack->a[j] = ft_atoi(argv[i], stack);
 		i++;
 		j++;
 	}
@@ -51,10 +51,11 @@ void	ft_fill_stack(int argc, char **argv, int i, t_stack *stack)
 
 t_stack	*ft_init(int argc, char **argv)
 {
+	t_stack	*stack;
 	char	**parse_nums;
 	int		nums_len;
-	t_stack	*stack;
 
+	stack = NULL;
 	parse_nums = NULL;
 	nums_len = 0;
 	if (argc == 2)
@@ -66,13 +67,11 @@ t_stack	*ft_init(int argc, char **argv)
 		ft_fill_stack(nums_len, parse_nums, 0, stack);
 		ft_free_matrix(parse_nums);
 	}
-	else if (argc >= 3)
+	if (argc >= 3)
 	{
 		stack = malloc(sizeof(t_stack));
 		ft_fill_stack(argc, argv, 1, stack);
 	}
-	else
-		return (NULL);
 	if (stack->last_a == 1)
 		ft_exit(stack);
 	return (stack);
