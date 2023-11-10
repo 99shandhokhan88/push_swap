@@ -6,7 +6,7 @@
 /*   By: vzashev <vzashev@student.42roma.it>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 13:29:07 by vzashev           #+#    #+#             */
-/*   Updated: 2023/11/07 15:14:43 by vzashev          ###   ########.fr       */
+/*   Updated: 2023/11/10 23:29:20 by vzashev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,16 +40,6 @@ int	ft_check_desc_order(int *stack, int dim)
 	return (1);
 }
 
-int	ft_check_push(t_stack *stack, int dim, int n)
-{
-	if (n == 1)
-		ft_pb(stack);
-	else if (n == 0)
-		ft_pa(stack);
-	dim--;
-	return (dim);
-}
-
 void	ft_temp_sort(int *temp_stack, int dim)
 {
 	int	i;
@@ -72,4 +62,14 @@ void	ft_temp_sort(int *temp_stack, int dim)
 		}
 		i++;
 	}
+}
+
+int	ft_check_push(t_stack *stack, int dim, int n)
+{
+	if (n == 1)
+		ft_pb(stack);
+	else if (n == 0)
+		ft_pa(stack);
+	dim--;
+	return (dim);
 }

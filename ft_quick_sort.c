@@ -6,32 +6,11 @@
 /*   By: vzashev <vzashev@student.42roma.it>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 13:29:42 by vzashev           #+#    #+#             */
-/*   Updated: 2023/11/07 17:12:13 by vzashev          ###   ########.fr       */
+/*   Updated: 2023/11/10 23:27:54 by vzashev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-void	ft_sort_three_a(t_stack *stack, int dim)
-{
-	if (dim == 3)
-	{
-		while (!(stack->a[0] < stack->a[1] && stack->a[1] < stack->a[2]))
-		{
-			if (stack->a[0] > stack->a[1] && stack->a[2])
-				ft_sa(stack);
-			else if (!(stack->a[2] > stack->a[0] && stack->a[2] > stack->a[1]))
-				dim = ft_check_push(stack, dim, 1);
-			else
-			{
-				ft_sa(stack);
-				ft_pa(stack);
-			}
-		}
-	}
-	else if (dim == 2 && stack->a[0] > stack->a[1])
-		ft_sa(stack);
-}
 
 int	ft_partition(int *pivot, int *stack, int dim)
 {
@@ -78,6 +57,33 @@ int	ft_sort_three_b(t_stack *stack, int dim)
 		}
 	}
 	return (0);
+}
+
+void	ft_sort_three_a(t_stack *stack, int dim)
+{
+	if (dim == 3 && stack->last_a == 3)
+		ft_sort_three(stack);
+	else if (dim == 2)
+	{
+		if (stack->a[0] > stack->a[1])
+			ft_sa(stack);
+	}
+	else if (dim == 3)
+	{
+		while (dim != 3 || !(stack->a[0] < stack->a[1]
+				&& stack->a[1] < stack->a[2]))
+		{
+			if (dim == 3 && stack->a[0] > stack->a[1] && stack->a[2])
+				ft_sa(stack);
+			else if (dim == 3 && !(stack->a[2] > stack->a[0]
+					&& stack->a[2] > stack->a[1]))
+				dim = ft_check_push(stack, dim, 1);
+			else if (stack->a[0] > stack->a[1])
+				ft_sa(stack);
+			else if (dim++)
+				ft_pa(stack);
+		}
+	}
 }
 
 int	ft_quick_sort_b(t_stack *stack, int dim, int count_r)
