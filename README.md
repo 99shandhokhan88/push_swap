@@ -93,3 +93,9 @@ Now, I encountered a significant challenge in this project: determining the pote
 - Debug any issues that arise during testing.
 
 During the entire 20-day period, I actively used the push_swap visualizer tool to visualize and analyze the actions performed by my code, making it easier to spot any inefficiencies or errors.
+
+The crucial aspect of this project is that planning takes precedence over coding. The code itself isn't "so difficult," but the design phase is the most challenging part. This project marks the first and perhaps the only one at 42 that delves into the initial approach to algorithms and data structures—a fundamental topic in the world of computer science and the professional realm. Algorithmic questions, similar to those found on sites like LeetCode, are frequently posed during interviews, making this project particularly relevant.
+
+Unfortunately, 42 doesn't extensively cover these topics. The essence of this project lies in the fact that you could either take four university exams on the subject, invest three months in studying, or opt to choose an algorithm and implement it. Another consideration is the use of lists or arrays. Lists may pose challenges initially, but they optimize the workflow. On the other hand, arrays are more straightforward and rustic, making them suitable for those who are still novices in C.
+
+The approach I took is to first write and then design. I opted for quicksort with the divide and conquer approach. The crux is recursion—understand it. The pivot's specific location isn't crucial; what matters is its presence and the categorization into smaller and larger elements.
