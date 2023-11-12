@@ -1222,6 +1222,28 @@ These functions (`ft_ra`, `ft_rb`, and `ft_rr`) are related to the rotation oper
      - Print the move ("ra") to the standard output.
      - Increment the 'moves' counter in the stack structure.
 
+```c
+void	ft_ra(t_stack *stack)
+{
+	int	temp;
+	int	i;
+
+	i = 0;
+	if (stack->len_a < 2)
+		return ;
+	temp = stack->a[0];
+	while (i < stack->len_a - 1)
+	{
+		stack->a[i] = stack->a[i + 1];
+		i++;
+	}
+	stack->a[i] = temp;
+	write(1, "ra\n", 3);
+	stack->moves++;
+}
+```
+
+
 2. **ft_rb - Rotate B:**
    - `void ft_rb(t_stack *stack)`
    - Description: Rotates the top element of stack B to the bottom.
@@ -1232,6 +1254,29 @@ These functions (`ft_ra`, `ft_rb`, and `ft_rr`) are related to the rotation oper
      - Place the stored element (`temp`) at the bottom of stack B.
      - Print the move ("rb") to the standard output.
      - Increment the 'moves' counter in the stack structure.
+    
+```c
+void	ft_rb(t_stack *stack)
+{
+	int	temp;
+	int	i;
+
+	i = 0;
+	if (stack->len_b < 2)
+		return ;
+	temp = stack->b[0];
+	while (i < stack->len_b - 1)
+	{
+		stack->b[i] = stack->b[i + 1];
+		i++;
+	}
+	stack->b[i] = temp;
+	write(1, "rb\n", 3);
+	stack->moves++;
+}
+```
+
+
 
 3. **ft_rr - Rotate Both:**
    - `void ft_rr(t_stack *stack)`
@@ -1244,6 +1289,39 @@ These functions (`ft_ra`, `ft_rb`, and `ft_rr`) are related to the rotation oper
      - Place the stored elements (`temp_a` and `temp_b`) at the bottom of stacks A and B, respectively.
      - Print the move ("rr") to the standard output.
      - Increment the 'moves' counter in the stack structure.
+
+```c
+void	ft_rr(t_stack *stack)
+{
+	int	temp_a;
+	int	temp_b;
+	int	i;
+
+	if (stack->len_a < 2 || stack->len_b < 2)
+		return ;
+	temp_a = stack->a[0];
+	temp_b = stack->b[0];
+	i = 0;
+	while (i < stack->len_a - 1)
+	{
+		stack->a[i] = stack->a[i + 1];
+		i++;
+	}
+	stack->a[i] = temp_a;
+	i = 0;
+	while (i < stack->len_b - 1)
+	{
+		stack->b[i] = stack->b[i + 1];
+		i++;
+	}
+	stack->b[i] = temp_b;
+	write(1, "rr\n", 3);
+	stack->moves++;
+}
+```
+
+
+
 
 These rotation operations are fundamental in rearranging elements within the stacks during the sorting process. They are crucial for achieving the desired order of elements.
 
