@@ -62,35 +62,37 @@ Now, I encountered a significant challenge in this project: determining the pote
 **Day 4 - Day 5: Implementation for 3 Random Numbers**
 
 - Begin coding the sorting algorithm for 3 random numbers.
-- Test your code with various scenarios and ensure it sorts the numbers correctly in a minimal number of actions (2 or less).
+- Test my code with various scenarios and ensure it sorts the numbers correctly in a minimal number of actions (2 or less).
 
 **Day 6 - Day 8: Implementation for 5 Random Numbers**
 
-- Extend your code to handle 5 random numbers.
+- Extend my code to handle 5 random numbers.
 - Apply the logic mentioned for moving the first two numbers to Stack B and sort the rest in Stack A.
-- Test your implementation thoroughly.
+- Test my implementation thoroughly.
 
 **Day 9 - Day 11: Implementation for 100 Random Numbers (Initial Approach)**
 
-- Implement the sorting algorithm for 100 random numbers, initially using the Insertion Sort algorithm.
+- Implement the sorting algorithm for 100 random numbers, initially using the Insertion Sort algorithm and then the Quick Sort.
 - Focus on getting the basic functionality working before optimization.
 
 **Day 12 - Day 15: Optimization for 100 Random Numbers**
 
-- Refine your code for 100 random numbers using the chunking strategy you outlined.
-- Test and compare the efficiency of your optimized approach with the initial Insertion Sort method.
+- Refine my code for 100 random numbers using the chunking strategy I outlined before.
+- Test and compare the efficiency of my optimized approach with the Quick Sort method.
 - Make sure it stays within the action limit of 12.
 
 **Day 16 - Day 18: Implementation for 500 Random Numbers**
 
 - Apply the optimized strategy for 100 random numbers to handle 500 random numbers.
 - Make any necessary adjustments based on the larger dataset.
+- I passed from Lnicoter/NicoTerabyte method to Dabi-rac method.
 
 **Day 19 - Day 20: Testing and Fine-Tuning**
 
 - Perform comprehensive testing with various input scenarios for all test cases: 3, 5, 100, and 500 random numbers.
-- Fine-tune your code, making it more efficient and optimizing action usage.
-- Debug any issues that arise during testing.
+- Fine-tune my code, making it more efficient and optimizing action usage.
+- Debug issues that arise during testing.
+- I fixed a bug: basically the terminal remains waiting after the last move when the last move is a pa with a number 0.
 
 During the entire 20-day period, I actively used the push_swap visualizer tool to visualize and analyze the actions performed by my code, making it easier to spot any inefficiencies or errors.
 
