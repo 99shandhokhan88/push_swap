@@ -1064,9 +1064,280 @@ Explanation:
 
 Similar explanations apply to the other "moves" functions (`ft_pb`, `ft_ra`, `ft_rb`, `ft_rr`, `ft_rra`, `ft_rrb`, `ft_rrr`, `ft_sa`, `ft_sb`, `ft_ss`). Each function represents a specific move in the "push_swap" algorithm, and they share a common structure:
 
-- Check if the operation is valid based on the size of the relevant stack.
-- Perform the specified operation.
-- Update stack sizes, print the operation, and increment the move count.
+The `ft_pb` function step by step:
+
+```c
+void	ft_pb(t_stack *stack)
+{
+    // Declare a variable 'i' for iteration.
+    int i;
+
+    // Check if stack A is empty. If it is, return from the function.
+    if (!stack->a)
+        return;
+
+    // Increment the length of stack B.
+    stack->len_b++;
+
+    // Shift elements in stack B to make room for the new element.
+    i = stack->len_b - 1;
+    while (i > 0)
+    {
+        stack->b[i] = stack->b[i - 1];
+        i--;
+    }
+
+    // Move the top element from stack A to the bottom of stack B.
+    stack->b[0] = stack->a[0];
+
+    // Shift elements in stack A to fill the gap left by the moved element.
+    i = 0;
+    while (i < stack->len_a - 1)
+    {
+        stack->a[i] = stack->a[i + 1];
+        i++;
+    }
+
+    // Decrement the length of stack A.
+    stack->len_a--;
+
+    // Print the move ("pb") to the standard output.
+    write(1, "pb\n", 3);
+
+    // Increment the 'moves' counter in the stack structure.
+    stack->moves++;
+}
+```
+
+Explanation:
+
+1. **Check if stack A is empty:** The function starts by checking if stack A (`stack->a`) is empty. If it is, the function returns without performing any further operations.
+
+2. **Increment the length of stack B:** The length of stack B (`stack->len_b`) is incremented to make room for the new element.
+
+3. **Shift elements in stack B:** The elements in stack B are shifted up by one position to make space for the new element that will be pushed onto stack B.
+
+4. **Move the top element from stack A to stack B:** The top element (index 0) from stack A is moved to the bottom of stack B.
+
+5. **Shift elements in stack A:** The elements in stack A are shifted down by one position to fill the gap left by the moved element.
+
+6. **Decrement the length of stack A:** The length of stack A is decremented since an element has been moved from stack A to stack B.
+
+7. **Print the move ("pb"):** The move "pb" (push B) is printed to the standard output using the `write` function.
+
+8. **Increment the 'moves' counter:** The 'moves' counter in the `t_stack` structure is incremented to keep track of the number of moves made in the algorithm.
+
+In summary, `ft_pb` implements the "push B" operation, moving the top element from stack A to stack B and updating the lengths of both stacks.
+
+
+These three functions, `ft_sa`, `ft_sb`, and `ft_ss`, are responsible for performing swapping operations on stacks A and B in my push swap algorithm. Here's an explanation for each:
+
+1. **ft_sa: Swap A**
+    - If the length of stack A is less than 2, there's nothing to swap, so the function returns.
+    - Otherwise, it swaps the top two elements of stack A.
+    - Prints "sa" to indicate the swap operation.
+    - Increments the 'moves' counter.
+
+    ```c
+    void	ft_sa(t_stack *stack)
+    {
+        int temp;
+
+        if (stack->len_a < 2)
+            return;
+        
+        temp = stack->a[0];
+        stack->a[0] = stack->a[1];
+        stack->a[1] = temp;
+
+        write(1, "sa\n", 3);
+        stack->moves++;
+    }
+    ```
+
+2. **ft_sb: Swap B**
+    - If the length of stack B is less than 2, there's nothing to swap, so the function returns.
+    - Otherwise, it swaps the top two elements of stack B.
+    - Prints "sb" to indicate the swap operation.
+    - Increments the 'moves' counter.
+
+    ```c
+    void	ft_sb(t_stack *stack)
+    {
+        int temp;
+
+        if (stack->len_b < 2)
+            return;
+
+        temp = stack->b[1];
+        stack->b[1] = stack->b[0];
+        stack->b[0] = temp;
+
+        write(1, "sb\n", 3);
+        stack->moves++;
+    }
+    ```
+
+3. **ft_ss: Swap Both**
+    - If either stack A or stack B has a length less than 2, there's nothing to swap, so the function returns.
+    - Otherwise, it swaps the top two elements of both stack A and stack B.
+    - Prints "ss" to indicate the swap operation.
+    - Increments the 'moves' counter.
+
+    ```c
+    void	ft_ss(t_stack *stack)
+    {
+        int temp_a;
+        int temp_b;
+
+        if (stack->len_a < 2 || stack->len_b < 2)
+            return;
+
+        temp_a = stack->a[1];
+        stack->a[1] = stack->a[0];
+        stack->a[0] = temp_a;
+
+        temp_b = stack->b[1];
+        stack->b[1] = stack->b[0];
+        stack->b[0] = temp_b;
+
+        write(1, "ss\n", 3);
+        stack->moves++;
+    }
+    ```
+
+These operations are fundamental for maintaining the order of elements in my stacks during the sorting process.
+
+
+These functions (`ft_ra`, `ft_rb`, and `ft_rr`) are related to the rotation operations in your push swap algorithm. Let's break down each function:
+
+1. **ft_ra - Rotate A:**
+   - `void ft_ra(t_stack *stack)`
+   - Description: Rotates the top element of stack A to the bottom.
+   - Explanation:
+     - If the length of stack A is less than 2, there is no need to rotate, so the function returns.
+     - Store the top element of stack A in the variable `temp`.
+     - Shift all elements in stack A one position to the top.
+     - Place the stored element (`temp`) at the bottom of stack A.
+     - Print the move ("ra") to the standard output.
+     - Increment the 'moves' counter in the stack structure.
+
+2. **ft_rb - Rotate B:**
+   - `void ft_rb(t_stack *stack)`
+   - Description: Rotates the top element of stack B to the bottom.
+   - Explanation:
+     - If the length of stack B is less than 2, there is no need to rotate, so the function returns.
+     - Store the top element of stack B in the variable `temp`.
+     - Shift all elements in stack B one position to the top.
+     - Place the stored element (`temp`) at the bottom of stack B.
+     - Print the move ("rb") to the standard output.
+     - Increment the 'moves' counter in the stack structure.
+
+3. **ft_rr - Rotate Both:**
+   - `void ft_rr(t_stack *stack)`
+   - Description: Applies `ft_ra` and `ft_rb` simultaneously, effectively rotating both stacks.
+   - Explanation:
+     - If either stack has a length of less than 2, there is no need to rotate, so the function returns.
+     - Store the top elements of both stack A (`temp_a`) and stack B (`temp_b`).
+     - Shift all elements in stack A one position to the top.
+     - Shift all elements in stack B one position to the top.
+     - Place the stored elements (`temp_a` and `temp_b`) at the bottom of stacks A and B, respectively.
+     - Print the move ("rr") to the standard output.
+     - Increment the 'moves' counter in the stack structure.
+
+These rotation operations are fundamental in rearranging elements within the stacks during the sorting process. They are crucial for achieving the desired order of elements.
+
+
+These three functions (`ft_rra`, `ft_rrb`, and `ft_rrr`) in my C code implement the "reverse rotate" operations for the stacks. Let's break down each function:
+
+1. **ft_rra: Reverse Rotate Stack A**
+   - The function takes a pointer to a `t_stack` structure (`stack`) as an argument.
+   - It rotates all elements in stack A downward by one position.
+   - It prints "rra" to signify the reverse rotation of stack A.
+   - The 'moves' counter in the `t_stack` structure is incremented.
+
+```c
+void ft_rra(t_stack *stack)
+{
+    int temp;
+    int i;
+
+    i = stack->len_a - 1;
+    temp = stack->a[i];
+    while (i > 0)
+    {
+        stack->a[i] = stack->a[i - 1];
+        i--;
+    }
+    stack->a[0] = temp;
+    write(1, "rra\n", 4);
+    stack->moves++;
+}
+```
+
+2. **ft_rrb: Reverse Rotate Stack B**
+   - Similar to `ft_rra`, but it performs a reverse rotation on stack B.
+
+```c
+void ft_rrb(t_stack *stack)
+{
+    int temp;
+    int i;
+
+    i = stack->len_b - 1;
+    temp = stack->b[i];
+    while (i > 0)
+    {
+        stack->b[i] = stack->b[i - 1];
+        i--;
+    }
+    stack->b[0] = temp;
+    write(1, "rrb\n", 4);
+    stack->moves++;
+}
+```
+
+3. **ft_rrr: Reverse Rotate Both Stacks**
+   - It combines the reverse rotations of stack A and stack B into a single operation.
+   - The function first checks if there are at least 2 elements in both stacks.
+   - It then performs the reverse rotation on both stacks separately.
+   - It prints "rrr" to signify the combined reverse rotation.
+   - The 'moves' counter in the `t_stack` structure is incremented.
+
+```c
+void ft_rrr(t_stack *stack)
+{
+    int temp_a;
+    int temp_b;
+    int i;
+
+    i = stack->len_a - 1;
+    if (stack->len_a < 2 || stack->len_b < 2)
+        return;
+    temp_a = stack->a[i];
+    temp_b = stack->b[0];
+    while (i > 0)
+    {
+        stack->a[i] = stack->a[i - 1];
+        i--;
+    }
+    stack->a[i] = temp_a;
+    i = stack->len_b - 1;
+    temp_b = stack->b[i];
+    while (i > 0)
+    {
+        stack->b[i] = stack->b[i - 1];
+        i--;
+    }
+    stack->b[i] = temp_b;
+    write(1, "rrr\n", 4);
+    stack->moves++;
+}
+```
+
+These functions are essential for manipulating the order of elements in your stacks during the sorting process.
+
+
 
 These functions collectively implement the various moves required to sort the stacks in the "push_swap" project.
 
