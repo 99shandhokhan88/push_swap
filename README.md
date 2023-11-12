@@ -99,3 +99,677 @@ The crucial aspect of this project is that planning takes precedence over coding
 Unfortunately, 42 doesn't extensively cover these topics. The essence of this project lies in the fact that you could either take four university exams on the subject, invest three months in studying, or opt to choose an algorithm and implement it. Another consideration is the use of lists or arrays. Lists may pose challenges initially, but they optimize the workflow. On the other hand, arrays are more straightforward and rustic, making them suitable for those who are still novices in C.
 
 The approach I took is to first write and then design. I opted for quicksort with the divide and conquer approach. The crux is recursion—understand it. The pivot's specific location isn't crucial; what matters is its presence and the categorization into smaller and larger elements.
+
+**DESCRITPION**
+
+```c
+#include "push_swap.h"
+
+int	main(int argc, char **argv)
+{
+	// Check if there are command-line arguments
+	if (argc > 1)
+	{
+		// Move to the next element in argv (skip program name)
+		argv++;
+		
+		// If there is only one argument, split it into separate strings
+		if (argc == 2)
+			argv = ft_split(*argv, ' ');
+
+		// Call the function to fill the stack with parsed input values
+		ft_fill_stack(argv);
+
+		// Return 0 to indicate successful execution
+		return (0);
+	}
+
+	// Return 0 to indicate successful execution if no arguments are provided
+	return (0);
+}
+```
+
+Explanation:
+
+1. `#include "push_swap.h"`: Includes the header file containing function declarations and necessary includes for the push_swap program.
+
+2. `int main(int argc, char **argv)`: The main function, which is the entry point of the program. It takes command-line arguments `argc` (argument count) and `argv` (argument vector).
+
+3. `if (argc > 1)`: Checks if there are command-line arguments provided (excluding the program name).
+
+4. `argv++`: Increments the `argv` pointer to skip the program name.
+
+5. `if (argc == 2) argv = ft_split(*argv, ' ');`: If there is only one argument, use the `ft_split` function to split it into separate strings based on the space character (' '). Update the `argv` pointer to point to the resulting array of strings.
+
+6. `ft_fill_stack(argv);`: Calls the `ft_fill_stack` function to fill the stacks with the parsed input values. This function is not provided in the provided code snippet, so further analysis would depend on its implementation.
+
+7. `return (0);`: Returns 0 to the operating system to indicate successful execution.
+
+8. The last `return (0);` is executed if no command-line arguments are provided. It also returns 0 to the operating system.
+
+This `main` function primarily handles command-line arguments, processes them using the `ft_split` function, and then calls another function (`ft_fill_stack`) to perform the core functionality of filling the stacks.
+
+
+Let's analyze the `ft_fill_stack` function:
+
+```c
+#include "push_swap.h"
+
+void	ft_fill_stack(char **argv)
+{
+	// Declare a structure of type 't_stack' to hold the stacks and other information
+	t_stack	stack;
+	// Variables to store the size of the input and the loop index
+	int		size;
+	int		i;
+
+	// Initialize the 'moves' field in the 'stack' structure to 0
+	stack.moves = 0;
+
+	// Initialize the loop index to -1
+	i = -1;
+
+	// Calculate the size of the input stack using the 'ft_len_stack' function
+	size = ft_len_stack(argv);
+
+	// Allocate memory for stack 'a' based on the size of the input
+	stack.a = malloc(size * sizeof(int));
+	if (!stack.a)
+		return ;
+
+	// Set the length of stack 'a' in the 'stack' structure
+	stack.len_a = size;
+
+	// Allocate memory for stack 'b' based on the size of the input
+	stack.b = malloc(size * sizeof(int));
+	if (!stack.b)
+	{
+		// Free memory allocated for stack 'a' if memory allocation for stack 'b' fails
+		free(stack.a);
+		return ;
+	}
+
+	// Initialize the length of stack 'b' in the 'stack' structure to 0
+	stack.len_b = 0;
+
+	// Loop to fill stack 'a' with parsed integer values from the input
+	while (++i < size)
+		stack.a[i] = ft_atoi(argv[i], stack.a);
+
+	// Check for duplicate values in stack 'a' and handle them
+	ft_find_doubles(stack.a, size);
+
+	// Call the sorting function 'ft_sort' to sort the stacks
+	ft_sort(&stack, size);
+
+	// Free the allocated memory for stack 'a' and stack 'b'
+	free(stack.a);
+	free(stack.b);
+}
+```
+
+Explanation:
+
+1. `t_stack stack;`: Declares a structure of type `t_stack` to hold information about the stacks and other related data.
+
+2. `int size;`: Declares a variable to store the size of the input stack.
+
+3. `int i;`: Declares a loop index variable.
+
+4. `stack.moves = 0;`: Initializes the 'moves' field in the 'stack' structure to 0.
+
+5. `i = -1;`: Initializes the loop index to -1.
+
+6. `size = ft_len_stack(argv);`: Calls the function `ft_len_stack` to calculate the size of the input stack.
+
+7. Memory allocation for stack 'a':
+   ```c
+   stack.a = malloc(size * sizeof(int));
+   if (!stack.a)
+       return ;
+   ```
+
+   If memory allocation fails, the function returns without proceeding further.
+
+8. `stack.len_a = size;`: Sets the length of stack 'a' in the 'stack' structure.
+
+9. Memory allocation for stack 'b':
+   ```c
+   stack.b = malloc(size * sizeof(int));
+   if (!stack.b)
+   {
+       free(stack.a);
+       return ;
+   }
+   ```
+
+   If memory allocation fails, it frees the memory allocated for stack 'a' and returns.
+
+10. `stack.len_b = 0;`: Initializes the length of stack 'b' in the 'stack' structure to 0.
+
+11. Loop to fill stack 'a' with parsed integer values from the input:
+   ```c
+   while (++i < size)
+       stack.a[i] = ft_atoi(argv[i], stack.a);
+   ```
+
+12. `ft_find_doubles(stack.a, size);`: Calls a function to check for duplicate values in stack 'a' and handles them.
+
+13. `ft_sort(&stack, size);`: Calls the sorting function `ft_sort` to sort the stacks.
+
+14. `free(stack.a);`: Frees the memory allocated for stack 'a'.
+
+15. `free(stack.b);`: Frees the memory allocated for stack 'b'.
+
+
+
+Let's analyze the `ft_error` and `ft_atoi` functions:
+
+```c
+#include "push_swap.h"
+
+void	ft_error(int *stack)
+{
+	// Free the memory allocated for the stack
+	free(stack);
+	// Write the "Error" message to standard output
+	write(0, "Error\n", 6);
+	// Exit the program with a return code of 1
+	exit(1);
+}
+```
+
+Explanation:
+
+1. `void ft_error(int *stack)`: The function takes a pointer to an integer array (`stack`) as a parameter.
+
+2. `free(stack);`: Frees the memory allocated for the stack.
+
+3. `write(0, "Error\n", 6);`: Writes the "Error" message to the standard output using the `write` system call.
+
+4. `exit(1);`: Exits the program with a return code of 1, indicating an error.
+
+```c
+int ft_is_digit(int c)
+{
+	// Check if the character is a digit (0-9)
+	if (c >= '0' && c <= '9')
+		return (1);
+	// Return 0 if the character is not a digit
+	return (0);
+}
+```
+
+Explanation:
+
+1. `int ft_is_digit(int c)`: The function takes an integer `c` as a parameter.
+
+2. `if (c >= '0' && c <= '9')`: Checks if the integer corresponds to a digit (0-9).
+
+3. `return (1);`: Returns 1 if the character is a digit.
+
+4. `return (0);`: Returns 0 if the character is not a digit.
+
+```c
+int ft_atoi(char *num, int *stack)
+{
+	// Variables to keep track of the index, sign, and result of the conversion
+	int			i;
+	int			sign;
+	long int	res;
+
+	// Initialize variables
+	i = 0;
+	sign = 1;
+	res = 0;
+
+	// Skip leading whitespaces
+	while (num[i] == 32 || (num[i] >= 9 && num[i] <= 13))
+		i++;
+
+	// Handle the sign
+	if (num[i] == '+')
+		i++;
+	else if (num[i] == '-')
+	{
+		sign = -1;
+		i++;
+	}
+
+	// Process the digits
+	while (num[i])
+	{
+		// Check if the character is a digit
+		if (!ft_is_digit(num[i]))
+			// Call the error function if a non-digit character is encountered
+			ft_error(stack);
+		// Update the result based on the digit
+		res = res * 10 + num[i++] - '0';
+	}
+
+	// Check for overflow or underflow
+	if (res > INT_MAX || res < INT_MIN)
+		// Call the error function if overflow or underflow occurs
+		ft_error(stack);
+
+	// Return the final result with the appropriate sign
+	return (res * sign);
+}
+```
+
+Explanation:
+
+1. `int ft_atoi(char *num, int *stack)`: The function takes a string `num` and a pointer to an integer array (`stack`) as parameters.
+
+2. Variables:
+   - `int i`: Loop index.
+   - `int sign`: Sign of the resulting integer.
+   - `long int res`: Result of the conversion.
+
+3. `while (num[i] == 32 || (num[i] >= 9 && num[i] <= 13))`: Skip leading whitespaces.
+
+4. Handle the sign:
+   - `if (num[i] == '+')`: Skip the plus sign.
+   - `else if (num[i] == '-')`: Set the sign to negative and skip the minus sign.
+
+5. Process the digits:
+   - `while (num[i])`: Loop through the characters of the string.
+   - Check if the character is a digit using `ft_is_digit`.
+   - Update the result based on the digit.
+
+6. `if (res > INT_MAX || res < INT_MIN)`: Check for overflow or underflow.
+
+7. `return (res * sign);`: Return the final result with the appropriate sign.
+
+
+
+
+
+Let's analyze the ft_quicksort in the given code:
+
+```c
+static void ft_temp_sort(int *temp_stack, int size)
+{
+	// Sort the temporary stack in ascending order
+	int i;
+	int j;
+	int temp;
+
+	i = 0;
+	while (i < size)
+	{
+		j = i + 1;
+		while (j < size)
+		{
+			// Swap elements if they are in the wrong order
+			if (temp_stack[i] > temp_stack[j])
+			{
+				temp = temp_stack[i];
+				temp_stack[i] = temp_stack[j];
+				temp_stack[j] = temp;
+			}
+			j++;
+		}
+		i++;
+	}
+}
+```
+
+Explanation:
+
+1. `static void ft_temp_sort(int *temp_stack, int size)`: The function takes an integer array `temp_stack` and its size as parameters.
+
+2. Sorting Algorithm: The function uses the Bubble Sort algorithm to sort the elements of the `temp_stack` array in ascending order.
+
+3. Nested Loops: Two nested loops are used to compare and swap elements.
+
+4. Bubble Sort: Elements are swapped if they are in the wrong order, gradually pushing the larger elements to the end of the array.
+
+```c
+static int ft_check_pivot(int *pivot, int *stack, int size)
+{
+	// Find the pivot by sorting a temporary stack
+	int *temp_stack;
+	int i;
+
+	// Allocate memory for the temporary stack
+	temp_stack = (int *)malloc(size * sizeof(int));
+	if (!temp_stack)
+		return (0);
+
+	// Copy elements from the original stack to the temporary stack
+	i = 0;
+	while (i < size)
+	{
+		temp_stack[i] = stack[i];
+		i++;
+	}
+
+	// Sort the temporary stack to find the median (pivot)
+	ft_temp_sort(temp_stack, size);
+	*pivot = temp_stack[size / 2];
+
+	// Free memory allocated for the temporary stack
+	free(temp_stack);
+
+	return (1);
+}
+```
+
+Explanation:
+
+1. `static int ft_check_pivot(int *pivot, int *stack, int size)`: The function takes an integer pointer `pivot`, an integer array `stack`, and its size as parameters.
+
+2. Memory Allocation: Allocates memory for a temporary stack (`temp_stack`).
+
+3. Copy Elements: Copies elements from the original stack to the temporary stack.
+
+4. Sort: Calls `ft_temp_sort` to sort the temporary stack.
+
+5. Find Pivot: Sets the pivot value to the middle element of the sorted temporary stack.
+
+6. Memory Deallocation: Frees the memory allocated for the temporary stack.
+
+7. Return: Returns 1 if the pivot is successfully found.
+
+```c
+static void ft_quicksort_stacks(t_stack *stack, int len)
+{
+	// Recursive quicksort implementation for stack A
+	if (len == 3 && stack->len_a == 3)
+		ft_sort_3a(stack);
+	else if (len == 2)
+	{
+		if (stack->a[0] > stack->a[1])
+			ft_sa(stack);
+	}
+	else if (len == 3)
+	{
+		// Loop until stack A is sorted
+		while (len != 3 || !(stack->a[0] < stack->a[1] && stack->a[1] < stack->a[2]))
+		{
+			// Sorting logic for stack A with three elements
+			if (len == 3 && stack->a[0] > stack->a[1] && stack->a[2])
+				ft_sa(stack);
+			else if (len == 3 && !(stack->a[2] > stack->a[0] && stack->a[2] > stack->a[1]))
+				len = ft_check_push(stack, len, 0);
+			else if (stack->a[0] > stack->a[1])
+				ft_sa(stack);
+			else if (len++)
+				ft_pa(stack);
+		}
+	}
+}
+```
+
+Explanation:
+
+1. `static void ft_quicksort_stacks(t_stack *stack, int len)`: The function takes a pointer to a `t_stack` structure (`stack`) and an integer `len` as parameters.
+
+2. Quick Sort Implementation: Implements the quicksort algorithm for stack A (`len` elements).
+
+3. Sorting Logic:
+   - If `len` is 3 and the length of stack A is 3, call `ft_sort_3a`.
+   - If `len` is 2, swap elements in stack A if necessary.
+   - If `len` is 3, loop until stack A is sorted using specific sorting logic.
+
+```c
+int ft_quicksort_b(t_stack *stack, int len, int count_rot)
+{
+	// Quicksort implementation for stack B
+	int pivot;
+	int numbers;
+
+	// Move sorted elements from B to A if B
+
+ is already sorted
+	if (ft_check_order(stack->b, len, 1) == 1)
+		while (len--)
+			ft_pa(stack);
+
+	// If there are 3 or fewer elements in B, sort them
+	if (len <= 3)
+	{
+		ft_sort_3b(stack, len);
+		return (1);
+	}
+
+	// Initialize variables
+	numbers = len;
+
+	// Find the pivot for B
+	if (!ft_check_pivot(&pivot, stack->b, len))
+		return (0);
+
+	// Move elements from B to A or rotate B until the pivot is reached
+	while (len != numbers / 2)
+	{
+		if (stack->b[0] >= pivot && len--)
+			ft_pa(stack);
+		else if (++count_rot)
+			ft_rb(stack);
+	}
+
+	// Rotate B back to the original position
+	while (numbers / 2 != stack->len_b && count_rot)
+		ft_rrb(stack);
+
+	// Recursively call quicksort on A and B
+	return (ft_quicksort_a(stack, numbers / 2 + numbers % 2, 0)
+		&& ft_quicksort_b(stack, numbers / 2, 0));
+}
+
+int ft_quicksort_a(t_stack *stack, int len, int count_rot)
+{
+	// Quicksort implementation for stack A
+	int pivot;
+	int numbers;
+
+	// If A is already sorted, return
+	if (ft_check_order(stack->a, len, 0) == 1)
+		return (1);
+
+	// Initialize variables
+	numbers = len;
+
+	// If there are 3 or fewer elements in A, sort them using a specialized function
+	if (len <= 3)
+	{
+		ft_quicksort_stacks(stack, len);
+		return (1);
+	}
+
+	// Find the pivot for A
+	if (!ft_check_pivot(&pivot, stack->a, len))
+		return (0);
+
+	// Move elements from A to B or rotate A until the pivot is reached
+	while (len != numbers / 2 + numbers % 2)
+	{
+		if (stack->a[0] < pivot && (len--))
+			ft_pb(stack);
+		else if (++count_rot)
+			ft_ra(stack);
+	}
+
+	// Rotate A back to the original position
+	while (numbers / 2 + numbers % 2 != stack->len_a && count_rot)
+		ft_rra(stack);
+
+	// Recursively call quicksort on A and B
+	return (ft_quicksort_a(stack, numbers / 2 + numbers % 2, 0)
+		&& ft_quicksort_b(stack, numbers / 2, 0));
+	return (1);
+}
+```
+
+Explanation:
+
+1. `int ft_quicksort_b(t_stack *stack, int len, int count_rot)`: The function implements the quicksort algorithm for stack B (`len` elements). It returns 1 if successful, 0 otherwise.
+
+2. Sorting B:
+   - Move sorted elements from B to A if B is already sorted.
+   - If there are 3 or fewer elements in B, sort them using a specialized function (`ft_sort_3b`).
+   - Find the pivot for B.
+   - Move elements from B to A or rotate B until the pivot is reached.
+   - Rotate B back to the original position.
+
+3. Recursive Call:
+   - Recursively call quicksort on A and B.
+
+4. `int ft_quicksort_a(t_stack *stack, int len, int count_rot)`: The function implements the quicksort algorithm for stack A (`len` elements). It returns 1 if successful, 0 otherwise.
+
+5. Sorting A:
+   - If A is already sorted, return.
+   - If there are 3 or fewer elements in A, sort them using a specialized function (`ft_quicksort_stacks`).
+   - Find the pivot for A.
+   - Move elements from A to B or rotate A until the pivot is reached.
+   - Rotate A back to the original position.
+
+6. Recursive Call:
+   - Recursively call quicksort on A and B.
+
+
+
+
+
+
+```c
+int ft_check_push(t_stack *stack, int dim, int push)
+{
+	// Push or pop elements between stacks based on the 'push' parameter
+	if (push == 0)
+		ft_pb(stack);
+	else
+		ft_pa(stack);
+	dim--;
+	return (dim);
+}
+```
+
+Explanation:
+
+1. `int ft_check_push(t_stack *stack, int dim, int push)`: The function takes a pointer to a `t_stack` structure (`stack`), an integer `dim`, and an integer `push` as parameters.
+
+2. Push or Pop Elements: If `push` is 0, it calls `ft_pb` (push B) to move the top element from stack A to stack B. If `push` is 1, it calls `ft_pa` (push A) to move the top element from stack B to stack A.
+
+3. Decrement Dimension: Decrements the `dim` variable (number of elements).
+
+4. Return: Returns the updated value of `dim`.
+
+```c
+int ft_sort_3b(t_stack *stack, int len)
+{
+	// Sort the top 3 elements in stack B
+	if (len == 1)
+		ft_pa(stack);
+	else if (len == 2)
+	{
+		// Swap elements in stack B if necessary and push to stack A
+		if (stack->b[0] < stack->b[1])
+			ft_sb(stack);
+		while (len--)
+			ft_pa(stack);
+	}
+	else if (len == 3)
+	{
+		// Loop until stack A is sorted
+		while (len || !(stack->a[0] < stack->a[1] && stack->a[1] < stack->a[2]))
+		{
+			// Sorting logic for stack A and B with three elements
+			if (len == 1 && stack->a[0] > stack->a[1])
+				ft_sa(stack);
+			else if (len == 1 || (len >= 2 && stack->b[0] > stack->b[1])
+				|| (len == 3 && stack->b[0] > stack->b[2]))
+				len = ft_check_push(stack, len, 1);
+			else
+				ft_sb(stack);
+		}
+	}
+	return (0);
+}
+```
+
+Explanation:
+
+1. `int ft_sort_3b(t_stack *stack, int len)`: The function takes a pointer to a `t_stack` structure (`stack`) and an integer `len` as parameters.
+
+2. Sorting Top 3 Elements in B:
+   - If `len` is 1, push the top element from stack B to stack A.
+   - If `len` is 2, swap elements in stack B if necessary, then push them to stack A.
+   - If `len` is 3, loop until stack A is sorted using specific sorting logic.
+
+```c
+void ft_sort_3a(t_stack *stack)
+{
+	// Sort the top 3 elements in stack A
+	if (stack->a[0] < stack->a[1] && stack->a[0] < stack->a[2] && stack->a[1] < stack->a[2])
+		return;
+	else if (stack->a[0] < stack->a[1] && stack->a[0] < stack->a[2] && stack->a[1] > stack->a[2])
+	{
+		// Special case: Rotate and swap in stack A
+		ft_rra(stack);
+		ft_sa(stack);
+	}
+	else if (stack->a[0] > stack->a[1] && stack->a[0] < stack->a[2] && stack->a[1] < stack->a[2])
+		ft_sa(stack);
+	else if (stack->a[0] < stack->a[1] && stack->a[0] > stack->a[2] && stack->a[1] > stack->a[2])
+		ft_rra(stack);
+	else if (stack->a[1] < stack->a[2] && stack->a[0] > stack->a[1] && stack->a[0] > stack->a[2])
+		ft_ra(stack);
+	else if (stack->a[1] > stack->a[2] && stack->a[0] > stack->a[1] && stack->a[0] > stack->a[2])
+	{
+		// Special case: Rotate and swap in stack A
+		ft_ra(stack);
+		ft_sa(stack);
+	}
+}
+```
+
+Explanation:
+
+1. `void ft_sort_3a(t_stack *stack)`: The function takes a pointer to a `t_stack` structure (`stack`) as a parameter.
+
+2. Sorting Top 3 Elements in A: Sorts the top 3 elements in stack A using specific cases:
+   - If the first element is the smallest, do nothing (already sorted).
+   - If the first element is smaller than the second and larger than the third, rotate and swap in stack A.
+   - If the first element is larger than the second and smaller than the third, swap elements in stack A.
+   - If the first element is larger than the second and larger than the third, rotate in stack A.
+   - If the second element is larger than the third and the first element is larger than both, rotate in stack A.
+   - If the second element is smaller than the third and the first element is larger than both, rotate and swap in stack A.
+
+```c
+int ft_sort(t_stack *stack, int size)
+{
+	// Sort the stack using various sorting functions
+	if (ft_check_order(stack->a, stack->len_a, 0) == 0)
+	{
+		// If there are 2 elements, swap them
+		if (size == 2)
+			ft_sa(stack);
+		// If there are 3 elements, use a specialized sorting function
+		else if (size == 3)
+			ft_sort_3a(stack);
+		// If there are more than 3 elements, use the quicksort algorithm
+		else
+			ft_quicksort_a(stack, size, 0);
+	}
+	return (0);
+}
+```
+
+Explanation:
+
+1. `int ft_sort(t_stack *stack, int size)`: The function takes a pointer to a `t_stack` structure (`stack`) and an integer `size` as parameters.
+
+
+
+2. Sorting the Stack:
+   - Check if stack A is already sorted. If not, sort it using various sorting functions.
+   - If there are 2 elements, swap them (`ft_sa`).
+   - If there are 3 elements, use a specialized sorting function (`ft_sort_3a`).
+   - If there are more than 3 elements, use the quicksort algorithm (`ft_quicksort_a`).
+  
+
+
+
