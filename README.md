@@ -92,6 +92,4 @@ Now, I encountered a significant challenge in this project: determining the pote
 - Fine-tune your code, making it more efficient and optimizing action usage.
 - Debug any issues that arise during testing.
 
-During the entire 20-day period, you should be actively using the push_swap visualizer tool to visualize and analyze the actions performed by your code, making it easier to spot any inefficiencies or errors.
-
-This roadmap should help you make steady progress and successfully complete your "push_swap" project within the given time frame. If you encounter any challenges or need further assistance along the way, don't hesitate to seek help and guidance. Good luck with your project!
+During the entire 20-day period, I actively used the push_swap visualizer tool to visualize and analyze the actions performed by my code, making it easier to spot any inefficiencies or errors.
