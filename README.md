@@ -773,3 +773,398 @@ Explanation:
 
 
 
+Let's analyze the functions in the ft_split:
+
+```c
+size_t	ft_str_len(const char *str)
+{
+	// Calculate the length of the string
+	size_t	i;
+
+	i = 0;
+	while (str[i])
+	{
+		i++;
+	}
+	return (i);
+}
+```
+
+Explanation:
+
+1. `size_t ft_str_len(const char *str)`: The function takes a pointer to a constant character array (`str`) and returns a `size_t` value representing the length of the string.
+
+2. Calculating Length: It iterates through the string until it reaches the null terminator (`'\0'`) and increments the counter `i` for each character.
+
+3. Return: Returns the final count `i`, representing the length of the string.
+
+```c
+char *ft_sub_str(char const *s, unsigned int start, size_t len)
+{
+	// Extract a substring from the given string
+	char	*ptr;
+	size_t	index;
+
+	if (!s)
+		return (NULL);
+	// Adjust the starting index if it exceeds the length of the string
+	if (start >= ft_str_len(s))
+		start = ft_str_len(s);
+	// Adjust the length if it extends beyond the string's length
+	if ((start + len) >= ft_str_len(s))
+		len = ft_str_len(s) - start;
+	ptr = malloc(sizeof(char) * (len + 1));
+	if (!ptr)
+		return (NULL);
+	index = 0;
+	while (index != len)
+	{
+		ptr[index] = *(s + start + index);
+		index++;
+	}
+	ptr[index] = '\0';
+	return (ptr);
+}
+```
+
+Explanation:
+
+1. `char *ft_sub_str(char const *s, unsigned int start, size_t len)`: The function takes a pointer to a constant character array (`s`), an unsigned integer `start`, and a `size_t` length `len`. It returns a dynamically allocated substring.
+
+2. Null Check: Checks if the input string is NULL and returns NULL if true.
+
+3. Adjusting Indices: Adjusts the starting index (`start`) if it exceeds the length of the string and adjusts the length (`len`) if it extends beyond the string's length.
+
+4. Memory Allocation: Allocates memory for the substring (`ptr`) based on the adjusted length.
+
+5. Copying Characters: Copies characters from the original string to the substring.
+
+6. Null Terminator: Adds a null terminator at the end of the substring.
+
+7. Return: Returns the dynamically allocated substring.
+
+```c
+static size_t	ft_count_word(const char *s, char c)
+{
+	// Count the number of words in the string separated by a specified character
+	size_t	words;
+
+	words = 0;
+	while (*s)
+	{
+		if (*s != c)
+		{
+			++words;
+			while (*s && *s != c)
+				++s;
+		}
+		else
+			++s;
+	}
+	return (words);
+}
+```
+
+Explanation:
+
+1. `static size_t ft_count_word(const char *s, char c)`: The function takes a pointer to a constant character array (`s`) and a character `c`. It returns the number of words in the string separated by the specified character.
+
+2. Counting Words: It iterates through the string, increments the `words` counter when a word is encountered, and moves to the next word.
+
+3. Return: Returns the total count of words.
+
+```c
+char **ft_split(const char *s, char c)
+{
+	// Split the string into an array of substrings based on a specified character
+	char	**str;
+	size_t	i;
+	size_t	len;
+
+	if (!s)
+		return (0);
+	i = 0;
+	// Allocate memory for the array of substrings
+	str = malloc(sizeof(char *) * (ft_count_word(s, c) + 1));
+	if (!str)
+		return (0);
+	while (*s)
+	{
+		if (*s != c)
+		{
+			// Calculate the length of the current word
+			len = 0;
+			while (*s && *s != c && ++len)
+				++s;
+			// Create a substring and store it in the array
+			str[i++] = ft_sub_str(s - len, 0, len);
+		}
+		else
+			++s;
+	}
+	str[i] = 0; // Null-terminate the array of substrings
+	return (str);
+}
+```
+
+Explanation:
+
+1. `char **ft_split(const char *s, char c)`: The main function that takes a pointer to a constant character array (`s`) and a character `c`. It returns an array of dynamically allocated substrings.
+
+2. Null Check: Checks if the input string is NULL and returns NULL if true.
+
+3. Memory Allocation: Allocates memory for the array of substrings (`str`) based on the count of words.
+
+4. Parsing and Creating Substrings: Iterates through the string, calculates the length of each word, and creates a substring for each word using the `ft_sub_str` function. Stores the substrings in the array.
+
+5. Null Termination: Adds a null terminator at the end of the array of substrings.
+
+6. Return: Returns the array of dynamically allocated substrings.
+
+
+
+Let's analyze the functions in the given "utils" file:
+
+```c
+int ft_len_stack(char **argv)
+{
+	// Calculate the length of the stack
+	int i = 0;
+	while (*argv)
+	{
+		argv++;
+		i++;
+	}
+	return i;
+}
+```
+
+Explanation:
+
+1. `int ft_len_stack(char **argv)`: The function takes a pointer to an array of strings (`argv`) as a parameter.
+
+2. Counting Stack Length: It iterates through the array of strings until it encounters a NULL pointer, counting the number of elements in the stack.
+
+3. Return: Returns the calculated length of the stack.
+
+```c
+int ft_check_order(int *stack, int size, int order)
+{
+	// Check if the elements in the stack are in ascending or descending order
+	int i;
+
+	if (order == 0)
+	{
+		i = 1;
+		while (i < size)
+		{
+			if (stack[i - 1] > stack[i])
+				return 0;
+			i++;
+		}
+		return 1;
+	}
+	else
+	{
+		i = 1;
+		while (i < size)
+		{
+			if (stack[i - 1] < stack[i])
+				return 0;
+			i++;
+		}
+		return 1;
+	}
+}
+```
+
+Explanation:
+
+1. `int ft_check_order(int *stack, int size, int order)`: The function takes an array of integers (`stack`), an integer `size`, and an integer `order` as parameters.
+
+2. Checking Order:
+   - If `order` is 0, it checks if the elements in the stack are in ascending order.
+   - If `order` is not 0, it checks if the elements in the stack are in descending order.
+
+3. Return: Returns 1 if the condition is met, 0 otherwise.
+
+```c
+void ft_find_doubles(int *stack, int size)
+{
+	// Check for duplicate elements in the stack
+	int i, j;
+
+	i = 0;
+	j = 1;
+	while (i < size)
+	{
+		while (j < size)
+		{
+			if (stack[i] == stack[j])
+				ft_error(stack);
+			j++;
+		}
+		i++;
+		j = i + 1;
+	}
+}
+```
+
+Explanation:
+
+1. `void ft_find_doubles(int *stack, int size)`: The function takes an array of integers (`stack`) and an integer `size` as parameters.
+
+2. Checking for Duplicates: It uses nested loops to compare each element with every other element in the stack, checking for duplicates.
+
+3. Duplicate Found: If a duplicate is found, it calls `ft_error` to handle the error.
+
+
+
+Let's analyze the "moves" functions in the "push_swap" project:
+
+```c
+void ft_pa(t_stack *stack)
+{
+	// Push the top element from stack B to stack A
+	int i;
+
+	if (!stack->b)
+		return;
+	stack->len_a++;
+	i = stack->len_a - 1;
+	while (i > 0)
+	{
+		stack->a[i] = stack->a[i - 1];
+		i--;
+	}
+	stack->a[0] = stack->b[0];
+	i = 0;
+	while (i < stack->len_b - 1)
+	{
+		stack->b[i] = stack->b[i + 1];
+		i++;
+	}
+	stack->len_b--;
+	write(1, "pa\n", 3);
+	stack->moves++;
+}
+```
+
+Explanation:
+
+1. `void ft_pa(t_stack *stack)`: The function performs the "pa" operation, pushing the top element from stack B to stack A.
+
+2. Shift Elements: It shifts elements in stack A and B to make room for the new element.
+
+3. Update Stack Sizes: Adjusts the sizes of stacks A and B accordingly.
+
+4. Output: Prints "pa" to signify the operation.
+
+5. Increment Moves: Updates the move count.
+
+Similar explanations apply to the other "moves" functions (`ft_pb`, `ft_ra`, `ft_rb`, `ft_rr`, `ft_rra`, `ft_rrb`, `ft_rrr`, `ft_sa`, `ft_sb`, `ft_ss`). Each function represents a specific move in the "push_swap" algorithm, and they share a common structure:
+
+- Check if the operation is valid based on the size of the relevant stack.
+- Perform the specified operation.
+- Update stack sizes, print the operation, and increment the move count.
+
+These functions collectively implement the various moves required to sort the stacks in the "push_swap" project.
+
+
+Now the Makefile:
+
+```make
+NAME = push_swap
+
+SRCS = ft_atoi.c \
+       ft_fill_stack.c \
+       ft_main.c \
+       ft_push.c \
+       ft_quicksort.c \
+       ft_reverse_rotate.c \
+       ft_rotate.c \
+       ft_sort.c \
+       ft_split.c \
+       ft_swap.c \
+       ft_utils.c \
+
+OBJS = $(SRCS:.c=.o)
+
+CC = gcc -g
+
+RM = rm -f
+
+FLGS = -Wall -Wextra -Werror -g
+
+%.o: %.c
+	$(CC) ${FLGS} -c $< -o $@
+
+$(NAME): $(OBJS)
+	$(CC) $(FLGS) -o $(NAME) $(OBJS)
+	@echo "\033[32mCompiled, OK!\033[0m"
+
+all: $(NAME)
+
+clean:
+	$(RM) $(OBJS)
+	@echo "\033[33mClean, OK!\033[0m"
+
+fclean: clean
+	$(RM) $(NAME)
+
+re: fclean all
+
+.PHONY: all clean fclean re
+```
+
+Explanation:
+
+1. **Variables:**
+   - `NAME`: Represents the executable name.
+   - `SRCS`: List of source files.
+   - `OBJS`: List of object files derived from source files.
+   - `CC`: Compiler command.
+   - `RM`: Remove command.
+   - `FLGS`: Compiler flags.
+
+2. **Pattern Rule:**
+   - `%.o: %.c`: A pattern rule to compile C source files into object files.
+
+3. **Compilation Rule:**
+   - `$(NAME): $(OBJS)`: Defines a rule to build the executable from object files.
+   - `$(CC) $(FLGS) -o $(NAME) $(OBJS)`: Compiles and links the object files to create the executable.
+   - `@echo "\033[32mCompiled, OK!\033[0m"`: Prints a message indicating successful compilation.
+
+4. **Phony Targets:**
+   - `.PHONY: all clean fclean re`: Marks these targets as phony (not associated with files) to ensure they are always executed.
+
+5. **Targets:**
+   - `all`: Default target. Builds the executable.
+   - `clean`: Removes object files.
+   - `fclean`: Removes object files and the executable.
+   - `re`: Cleans and rebuilds the project.
+
+The Makefile provides a convenient way to compile, clean, and rebuild the "push_swap" project.
+
+
+The header file for the "push_swap" project is well-structured and provides a clear overview of the functions and their prototypes. Here are some observations:
+
+1. **Header Guards:**
+   - You have used proper header guards (`#ifndef PUSH_SWAP_H`, `#define PUSH_SWAP_H`, `#endif`) to prevent double inclusion of the header file.
+
+2. **Includes:**
+   - You have included necessary standard C libraries (`<unistd.h>`, `<stdio.h>`, `<stdlib.h>`, `<limits.h>`).
+
+3. **Data Structures:**
+   - The `t_stack` structure is appropriately defined to hold information about the two stacks (`a` and `b`), their lengths, and the number of moves.
+
+4. **Function Prototypes:**
+   - Function prototypes are well-declared and match the implementations in the source files.
+
+5. **Comments:**
+   - Each function prototype has a brief comment describing its purpose, which is helpful for understanding the functionality at a glance.
+
+6. **Consistency:**
+   - The naming of functions and structure members is consistent and follows a clear pattern, which is good for code readability.
+
+Overall, the header file provides a clear interface for the functions in the project, making it easy for other developers (or yourself) to understand and use the code.
