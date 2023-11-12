@@ -1,8 +1,8 @@
 # push_swap
 
-"push_swap" is a computer science project that challenges students to create an algorithm in the C programming language. The objective is to sort a randomly ordered list of numbers in two stacks (Stack A and Stack B) using a limited set of predefined actions, such as swapping elements, rotating the stacks, and pushing elements between the stacks. The main goal of the project is to sort the numbers in Stack A with the fewest possible actions. Students must devise efficient sorting strategies to accomplish this within the project's action limit.
+This repository is about "push_swap": a computer science project in C language that challenges to create an algorithm using the stacks data structures. The objective is to sort a randomly ordered list of integers, positive and negative, numbers in two stacks (Stack A and Stack B) using a limited set of predefined actions, such as swapping elements, rotating the stacks, and pushing elements between the stacks. The main goal of the project is to sort the numbers in Stack A with the fewest possible actions. Students must devise efficient sorting strategies to accomplish this within the project's action limit.
 
-Here's my roadmap for "push_swap" project, broken down into a 20-day schedule based on my experience:
+Here's my roadmap for "push_swap" project, broken down into a 20-days schedule based on my experience:
 
 ## Day 1 - Day 4: Understanding the Project and Problem**
 
@@ -52,14 +52,12 @@ The idea is simple, You have two stacks called Stack A and Stack B. Stack A is g
 So what actions are we allowed to use on the two stacks?
 The actions are named: sa, sb, ss, ra, rb, rr, rra, rrb, rrr, pa, pb.
 Here’s how they all work:
+sa / sb / ss : switch, swaps the first number in the stack with the second.
+ra / rb / rr : rotate, moves the last number of the stack to the first position, consequently causing all the others to scale.
+rra / rrb / rrr : reverse rotate, trivially the same as above but in the opposite sense.
+pa / pb : push in *, moves the number to the top position of the opposite stack in the named stack. So pb takes the first number from a to b.
 
-
-
-
-
-
-
-
+Now, I encountered a significant challenge in this project: determining the potential number of moves. A careful examination of the project description won't yield any specific mention of this aspect. Nonetheless, it's crucial to understand that achieving top scores necessitates executing 700 moves with 100 numbers and 5,500 moves with 500 numbers. I've allocated approximately 70% of my efforts to meticulously enhancing this aspect of the project. My dedication to optimization is evident throughout the entirety of my work.
 
 **Day 4 - Day 5: Implementation for 3 Random Numbers**
 
