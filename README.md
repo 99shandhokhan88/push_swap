@@ -1149,7 +1149,7 @@ The Makefile provides a convenient way to compile, clean, and rebuild the "push_
 
 The header file for the "push_swap" project is well-structured and provides a clear overview of the functions and their prototypes:
 
-```header
+```c
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
