@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: vzashev <vzashev@student.42roma.it>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/07 13:29:22 by vzashev           #+#    #+#             */
-/*   Updated: 2023/11/08 16:09:15 by vzashev          ###   ########.fr       */
+/*   Created: 2023/11/11 22:44:50 by vzashev           #+#    #+#             */
+/*   Updated: 2023/11/12 15:24:00 by vzashev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,13 @@
 
 int	main(int argc, char **argv)
 {
-	t_stack	*stack;
-
-	if (argc < 2)
+	if (argc > 1)
+	{
+		argv++;
+		if (argc == 2)
+			argv = ft_split(*argv, ' ');
+		ft_fill_stack(argv);
 		return (0);
-	stack = ft_init(argc, argv);
-	ft_sort(stack);
-	ft_exit(stack);
+	}
 	return (0);
 }

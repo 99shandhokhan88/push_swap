@@ -6,30 +6,27 @@
 #    By: vzashev <vzashev@student.42roma.it>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/07 13:30:37 by vzashev           #+#    #+#              #
-#    Updated: 2023/11/07 13:30:39 by vzashev          ###   ########.fr        #
+#    Updated: 2023/11/12 16:07:27 by vzashev          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = push_swap
 
-SRCS		=	ft_main.c \
-				ft_init.c \
-				ft_split.c \
-				ft_utils.c \
-				ft_sort.c \
-				ft_checks.c \
-				ft_swap.c \
-				ft_sort_three.c \
-				ft_rotate.c \
+SRCS		=	ft_atoi.c \
+				ft_fill_stack.c \
+				ft_main.c \
+				ft_push.c \
+				ft_quicksort.c \
 				ft_reverse_rotate.c \
-				ft_quick_sort.c \
-				ft_push.c
+				ft_rotate.c \
+				ft_sort.c \
+				ft_split.c \
+				ft_swap.c \
+				ft_utils.c \
 
 OBJS		=	$(SRCS:.c=.o)
 
 CC			=	gcc -g
-
-HEADER		=	./push_swap.h
 
 RM			=	rm -f
 
@@ -40,13 +37,13 @@ FLGS		=	-Wall -Wextra -Werror -g
 
 $(NAME): $(OBJS)
 	$(CC) $(FLGS) -o $(NAME) $(OBJS)
-	@echo "\033[32mCompiled OK!\033[0m"
+	@echo "\033[32mCompiled, OK!\033[0m"
 
 all: $(NAME)
 
 clean:
 	$(RM) $(OBJS)
-	@echo "\033[33mclean OK!\033[0m"
+	@echo "\033[33mClean, OK!\033[0m"
 
 fclean: clean
 	$(RM) $(NAME)

@@ -6,61 +6,71 @@
 /*   By: vzashev <vzashev@student.42roma.it>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 13:29:48 by vzashev           #+#    #+#             */
-/*   Updated: 2023/11/07 17:13:59 by vzashev          ###   ########.fr       */
+/*   Updated: 2023/11/12 15:05:44 by vzashev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	ft_rra(t_stack *stack)
+void	ft_rra(t_stack *stack)
 {
-	int	len;
 	int	temp;
+	int	i;
 
-	temp = stack->a[stack->last_a - 1];
-	len = stack->last_a;
-	while (len > 0)
+	i = stack->len_a - 1;
+	temp = stack->a[i];
+	while (i > 0)
 	{
-		stack->a[len] = stack->a[len - 1];
-		len--;
+		stack->a[i] = stack->a[i - 1];
+		i--;
 	}
 	stack->a[0] = temp;
 	write(1, "rra\n", 4);
-	return (1);
+	stack->moves++;
 }
 
-int	ft_rrb(t_stack *stack)
+void	ft_rrb(t_stack *stack)
 {
-	int	len;
 	int	temp;
+	int	i;
 
-	len = stack->last_b;
-	temp = stack->b[stack->last_b - 1];
-	while (len > 1)
+	i = stack->len_b - 1;
+	temp = stack->b[i];
+	while (i > 0)
 	{
-		stack->b[len - 1] = stack->b[len - 2];
-		len--;
+		stack->b[i] = stack->b[i - 1];
+		i--;
 	}
 	stack->b[0] = temp;
 	write(1, "rrb\n", 4);
-	return (1);
+	stack->moves++;
 }
 
-int	ft_rrr(t_stack *stack)
+void	ft_rrr(t_stack *stack)
 {
-	int	len;
-	int	temp;
+	int	temp_a;
+	int	temp_b;
+	int	i;
 
-	temp = stack->a[stack->last_a - 1];
-	len = stack->last_a;
-	while (len-- > 0)
-		stack->a[len] = stack->a[len - 1];
-	stack->a[0] = temp;
-	temp = stack->b[stack->last_b - 1];
-	len = stack->last_b;
-	while (len-- > 0)
-		stack->b[len] = stack->b[len - 1];
-	stack->b[0] = temp;
+	i = stack->len_a - 1;
+	if (stack->len_a < 2 || stack->len_b < 2)
+		return ;
+	temp_a = stack->a[i];
+	temp_b = stack->b[0];
+	while (i > 0)
+	{
+		stack->a[i] = stack->a[i - 1];
+		i--;
+	}
+	stack->a[i] = temp_a;
+	i = stack->len_b - 1;
+	temp_b = stack->b[i];
+	while (i > 0)
+	{
+		stack->b[i] = stack->b[i - 1];
+		i--;
+	}
+	stack->b[i] = temp_b;
 	write(1, "rrr\n", 4);
-	return (1);
+	stack->moves++;
 }
