@@ -1149,6 +1149,8 @@ The Makefile provides a convenient way to compile, clean, and rebuild the "push_
 
 The header file for the "push_swap" project is well-structured and provides a clear overview of the functions and their prototypes:
 
+```header
+
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
@@ -1215,6 +1217,8 @@ int		ft_check_order(int *stack, int size, int order);
 int		ft_len_stack(char **argv);
 
 #endif
+
+```
 
 1. **Header Guards:**
    - You have used proper header guards (`#ifndef PUSH_SWAP_H`, `#define PUSH_SWAP_H`, `#endif`) to prevent double inclusion of the header file.
