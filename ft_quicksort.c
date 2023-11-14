@@ -6,7 +6,7 @@
 /*   By: vzashev <vzashev@student.42roma.it>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 23:03:17 by vzashev           #+#    #+#             */
-/*   Updated: 2023/11/12 15:01:28 by vzashev          ###   ########.fr       */
+/*   Updated: 2023/11/14 16:30:29 by vzashev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ int	ft_quicksort_b(t_stack *stack, int len, int count_rot)
 		else if (++count_rot)
 			ft_rb(stack);
 	}
-	while (numbers / 2 != stack->len_b && count_rot)
+	while (numbers / 2 != stack->len_b && count_rot--)
 		ft_rrb(stack);
 	return (ft_quicksort_a(stack, numbers / 2 + numbers % 2, 0)
 		&& ft_quicksort_b(stack, numbers / 2, 0));
@@ -135,7 +135,7 @@ int	ft_quicksort_a(t_stack *stack, int len, int count_rot)
 		else if (++count_rot)
 			ft_ra(stack);
 	}
-	while (numbers / 2 + numbers % 2 != stack->len_a && count_rot)
+	while (numbers / 2 + numbers % 2 != stack->len_a && count_rot--)
 		ft_rra(stack);
 	return (ft_quicksort_a(stack, numbers / 2 + numbers % 2, 0)
 		&& ft_quicksort_b(stack, numbers / 2, 0));
