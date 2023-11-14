@@ -553,7 +553,7 @@ int ft_quicksort_b(t_stack *stack, int len, int count_rot)
 	}
 
 	// Rotate B back to the original position
-	while (numbers / 2 != stack->len_b && count_rot)
+	while (numbers / 2 != stack->len_b && count_rot--)
 		ft_rrb(stack);
 
 	// Recursively call quicksort on A and B
@@ -595,7 +595,7 @@ int ft_quicksort_a(t_stack *stack, int len, int count_rot)
 	}
 
 	// Rotate A back to the original position
-	while (numbers / 2 + numbers % 2 != stack->len_a && count_rot)
+	while (numbers / 2 + numbers % 2 != stack->len_a && count_rot--)
 		ft_rra(stack);
 
 	// Recursively call quicksort on A and B
