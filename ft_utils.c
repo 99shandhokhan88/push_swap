@@ -6,11 +6,25 @@
 /*   By: vzashev <vzashev@student.42roma.it>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 13:30:32 by vzashev           #+#    #+#             */
-/*   Updated: 2023/11/14 23:04:21 by vzashev          ###   ########.fr       */
+/*   Updated: 2023/11/14 23:15:35 by vzashev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+char	*ft_str_chr(const char *s, int c)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < ft_strlen(s) + 1)
+	{
+		if (*(s + i) == (char)c)
+			return ((char *)(s + i));
+		i++;
+	}
+	return (NULL);
+}
 
 int	ft_len_stack(char **argv)
 {
