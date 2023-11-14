@@ -5,92 +5,92 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: vzashev <vzashev@student.42roma.it>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/07 13:30:19 by vzashev           #+#    #+#             */
-/*   Updated: 2023/11/11 22:45:37 by vzashev          ###   ########.fr       */
+/*   Created: 2023/11/14 22:58:54 by vzashev           #+#    #+#             */
+/*   Updated: 2023/11/14 22:58:58 by vzashev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-size_t	ft_str_len(const char *str)
+size_t	ft_strlen(const char *s)
 {
-	size_t	i;
+	int	c;
+
+	c = 0;
+	while (s[c] != '\0')
+	{
+		c++;
+	}
+	return (c);
+}
+
+int	count_words(char const *s, char c)
+{
+	int	words;
+	int	i;
 
 	i = 0;
-	while (str[i])
-	{
-		i++;
-	}
-	return (i);
-}
-
-char	*ft_sub_str(char const *s, unsigned int start, size_t len)
-{
-	char	*ptr;
-	size_t	index;
-
-	if (!s)
-		return (NULL);
-	if (start >= ft_str_len(s))
-		start = ft_str_len(s);
-	if ((start + len) >= ft_str_len(s))
-		len = ft_str_len(s) - start;
-	ptr = malloc(sizeof(char) * (len + 1));
-	if (!ptr)
-		return (NULL);
-	index = 0;
-	while (index != len)
-	{
-		ptr[index] = *(s + start + index);
-		index++;
-	}
-	ptr[index] = '\0';
-	return (ptr);
-}
-
-static size_t	ft_count_word(const char *s, char c)
-{
-	size_t	words;
-
 	words = 0;
-	while (*s)
+	while (s[i])
 	{
-		if (*s != c)
+		if (s[i] != c)
 		{
-			++words;
-			while (*s && *s != c)
-				++s;
+			words++;
+			while (s[i] != c && s[i])
+			{
+				i++;
+			}
 		}
 		else
-			++s;
+			i++;
 	}
 	return (words);
 }
 
-char	**ft_split(const char *s, char c)
+char	*strsub(char const *s, unsigned int start, size_t len)
 {
-	char	**str;
-	size_t	i;
-	size_t	len;
+	size_t	j;
+	char	*str;
 
-	if (!s)
-		return (0);
-	i = 0;
-	str = malloc(sizeof(char *) * (ft_count_word(s, c) + 1));
+	str = malloc(sizeof(char) * (len - start + 1));
 	if (!str)
-		return (0);
-	while (*s)
+		return (NULL);
+	j = 0;
+	while (start < len)
 	{
-		if (*s != c)
-		{
-			len = 0;
-			while (*s && *s != c && ++len)
-				++s;
-			str[i++] = ft_sub_str(s - len, 0, len);
-		}
-		else
-			++s;
+		str[j] = s[start];
+		j++;
+		start++;
 	}
-	str[i] = 0;
+	str[j] = 0;
 	return (str);
+}
+
+char	**ft_split(char const *s, char c)
+{
+	size_t	i;
+	size_t	j;
+	int		index;
+	char	**split;
+
+	split = malloc((count_words(s, c) + 1) * sizeof(char *));
+	if (!s || !split)
+		return (NULL);
+	i = 0;
+	j = 0;
+	index = -1;
+	while (i <= ft_strlen(s))
+	{
+		if (s[i] != c && index < 0)
+			index = i;
+		else if ((s[i] == c || i == ft_strlen(s)) && index >= 0)
+		{
+			split[j] = strsub(s, index, i);
+			index = -1;
+			j++;
+		}
+		i++;
+	}
+	split[j] = 0;
+	return (split);
 }

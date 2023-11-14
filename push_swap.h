@@ -6,7 +6,7 @@
 /*   By: vzashev <vzashev@student.42roma.it>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 13:30:45 by vzashev           #+#    #+#             */
-/*   Updated: 2023/11/12 16:06:43 by vzashev          ###   ########.fr       */
+/*   Updated: 2023/11/14 23:05:24 by vzashev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ void	ft_ra(t_stack *stack);
 void	ft_rb(t_stack *stack);
 void	ft_rr(t_stack *stack);
 
+void	ft_free_matrix(char **matrix);
+
 // ft_sort.c
 int		ft_sort(t_stack *stack, int size);
 void	ft_sort_3a(t_stack *stack);
@@ -61,9 +63,10 @@ int		ft_sort_3b(t_stack *stack, int len);
 int		ft_check_push(t_stack *stak, int dim, int push);
 
 // ft_split.c
-char	**ft_split(const char *s, char c);
-char	*ft_sub_str(char const *s, unsigned int start, size_t len);
-size_t	ft_str_len(const char *str);
+char	**ft_split(char const *s, char c);
+char	*strsub(char const *s, unsigned int start, size_t len);
+int		count_words(char const *s, char c);
+size_t	ft_strlen(const char *s);
 
 // ft_swap.c
 void	ft_sa(t_stack *stack);

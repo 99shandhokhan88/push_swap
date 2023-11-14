@@ -6,7 +6,7 @@
 /*   By: vzashev <vzashev@student.42roma.it>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 15:24:18 by vzashev           #+#    #+#             */
-/*   Updated: 2023/11/12 15:24:36 by vzashev          ###   ########.fr       */
+/*   Updated: 2023/11/14 22:58:17 by vzashev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,17 @@ void	ft_fill_stack(char **argv)
 	ft_sort(&stack, size);
 	free(stack.a);
 	free(stack.b);
+}
+
+void	ft_free_matrix(char **matrix)
+{
+	int	i;
+
+	i = 0;
+	while (matrix && matrix[i])
+	{
+		free(matrix[i]);
+		i++;
+	}
+	free(matrix);
 }

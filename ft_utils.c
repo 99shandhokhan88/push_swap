@@ -6,7 +6,7 @@
 /*   By: vzashev <vzashev@student.42roma.it>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 13:30:32 by vzashev           #+#    #+#             */
-/*   Updated: 2023/11/12 16:06:35 by vzashev          ###   ########.fr       */
+/*   Updated: 2023/11/14 23:04:21 by vzashev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,12 @@ int	ft_len_stack(char **argv)
 	int	i;
 
 	i = 0;
-	while (*argv)
+	if (argv == NULL)
 	{
-		argv++;
-		i++;
+		return (0);
 	}
+	while (argv[i] != NULL)
+		i++;
 	return (i);
 }
 
