@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vzashev <vzashev@student.42roma.it>        +#+  +:+       +#+        */
+/*   By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 22:58:54 by vzashev           #+#    #+#             */
-/*   Updated: 2023/11/14 22:58:58 by vzashev          ###   ########.fr       */
+/*   Updated: 2023/11/15 23:25:44 by ofadhel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ char	*strsub(char const *s, unsigned int start, size_t len)
 	return (str);
 }
 
-char	**ft_split(char const *s, char c)
+char	**ft_split(char const *s, char c, t_stack *stack)
 {
 	size_t	i;
 	size_t	j;
@@ -92,5 +92,7 @@ char	**ft_split(char const *s, char c)
 		i++;
 	}
 	split[j] = 0;
+	ft_fill_stack(split, stack);
+	ft_free_matrix(split);
 	return (split);
 }
