@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vzashev <vzashev@student.42roma.it>        +#+  +:+       +#+        */
+/*   By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 22:52:13 by vzashev           #+#    #+#             */
-/*   Updated: 2023/11/14 16:26:39 by vzashev          ###   ########.fr       */
+/*   Updated: 2023/11/15 23:36:21 by ofadhel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	ft_is_digit(int c)
 	return (0);
 }
 
-int	ft_atoi(char *num, int *stack)
+int	ft_atoi(char *num, int *stack, char **argv, t_stack *stac)
 {
 	int			i;
 	int			sign;
@@ -47,10 +47,18 @@ int	ft_atoi(char *num, int *stack)
 	while (num[i])
 	{
 		if (!ft_is_digit(num[i]))
+		{
+			if (stac->flag == 1)
+				ft_free_matrix(argv);
 			ft_error(stack);
+		}
 		res = res * 10 + num[i++] - '0';
 	}
 	if (res > INT_MAX || res < INT_MIN)
+	{
+		if (stac->flag == 1)
+			ft_free_matrix(argv);
 		ft_error(stack);
+	}
 	return (res * sign);
 }

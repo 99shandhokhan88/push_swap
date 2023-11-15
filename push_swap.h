@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vzashev <vzashev@student.42roma.it>        +#+  +:+       +#+        */
+/*   By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 13:30:45 by vzashev           #+#    #+#             */
-/*   Updated: 2023/11/14 23:15:46 by vzashev          ###   ########.fr       */
+/*   Updated: 2023/11/15 23:22:46 by ofadhel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ typedef struct s_stack
 {
 	int	*a;
 	int	*b;
+	int	flag;
 	int	len_a;
 	int	len_b;
 	int	moves;
@@ -30,10 +31,10 @@ typedef struct s_stack
 // ft_atoi.c
 void	ft_error(int *stack);
 int		ft_is_digit(int c);
-int		ft_atoi(char *num, int *stack);
+int		ft_atoi(char *num, int *stack, char **argv, t_stack *stac);
 
 // ft_main.c
-void	ft_fill_stack(char **argv);
+void	ft_fill_stack(char **argv, t_stack *stack);
 int		main(int argc, char **argv);
 
 // ft_push.c
@@ -63,7 +64,7 @@ int		ft_sort_3b(t_stack *stack, int len);
 int		ft_check_push(t_stack *stak, int dim, int push);
 
 // ft_split.c
-char	**ft_split(char const *s, char c);
+char	**ft_split(char const *s, char c, t_stack *stack);
 char	*strsub(char const *s, unsigned int start, size_t len);
 int		count_words(char const *s, char c);
 size_t	ft_strlen(const char *s);
