@@ -6,7 +6,7 @@
 /*   By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 15:24:18 by vzashev           #+#    #+#             */
-/*   Updated: 2023/11/15 23:37:12 by ofadhel          ###   ########.fr       */
+/*   Updated: 2023/11/16 17:38:41 by ofadhel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	ft_fill_stack(char **argv, t_stack *stack)
 	stack->len_b = 0;
 	while (++i < size)
 		stack->a[i] = ft_atoi(argv[i], stack->a, argv, stack);
-	ft_find_doubles(stack->a, size);
+	ft_find_doubles(stack->a, size, argv, stack);
 	stack->b = malloc(size * sizeof(int));
 	if (!stack->b)
 	{

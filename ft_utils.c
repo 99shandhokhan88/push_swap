@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vzashev <vzashev@student.42roma.it>        +#+  +:+       +#+        */
+/*   By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 13:30:32 by vzashev           #+#    #+#             */
-/*   Updated: 2023/11/14 23:15:35 by vzashev          ###   ########.fr       */
+/*   Updated: 2023/11/16 17:40:01 by ofadhel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	ft_check_order(int *stack, int size, int order)
 	}
 }
 
-void	ft_find_doubles(int *stack, int size)
+void	ft_find_doubles(int *stack, int size, char **argv, t_stack *stac)
 {
 	int	i;
 	int	j;
@@ -80,7 +80,11 @@ void	ft_find_doubles(int *stack, int size)
 		while (j < size)
 		{
 			if (stack[i] == stack[j])
+			{
+				if (stac->flag == 1)
+					ft_free_matrix(argv);
 				ft_error(stack);
+			}
 			j++;
 		}
 		i++;
