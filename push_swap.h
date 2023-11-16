@@ -6,7 +6,7 @@
 /*   By: ofadhel <ofadhel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 13:30:45 by vzashev           #+#    #+#             */
-/*   Updated: 2023/11/15 23:22:46 by ofadhel          ###   ########.fr       */
+/*   Updated: 2023/11/16 17:39:53 by ofadhel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	ft_ss(t_stack *stack);
 
 // ft_utils.c
 char	*ft_str_chr(const char *s, int c);
-void	ft_find_doubles(int *stack, int size);
+void	ft_find_doubles(int *stack, int size, char **argv, t_stack *stac);
 int		ft_check_order(int *stack, int size, int order);
 int		ft_len_stack(char **argv);
 
